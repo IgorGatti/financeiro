@@ -1,0 +1,45 @@
+services:
+  db:
+    build: ./db
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./app
+    container_name: node_app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_NAME: myapp
+    volumes:
+      - ./app:/app
+      - /app/node_modules 
+    ports:
+      - "3000:3000"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: P@ssw0rd
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  pgdata:
+  pgadmin_data:

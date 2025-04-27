@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Usuários</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="container mx-auto p-4">
+    <h1 class="text-2xl mb-4">Lista de Usuários</h1>
+    
+    <a href="/users/add" class="bg-blue-500 text-white px-4 py-2 rounded">Adicionar Usuário</a>
+    
+    <ul class="mt-4">
+        <% if (items && items.length > 0) { %>
+            <% items.forEach(function(item) { %>
+                <li class="border-b py-2">
+                    <%= item.name %> - <%= item.email %>
+                    <a href="/users/edit/<%= item.id %>" class="text-blue-600 ml-4">Editar</a>
+                    <form method="POST" action="/users/delete/<%= item.id %>" style="display:inline;">
+                        <button type="submit" class="text-red-600 ml-2">Excluir</button>
+                    </form>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li>Nenhum usuário cadastrado</li>
+        <% } %>
+    </ul>
+</body>
+</html>
