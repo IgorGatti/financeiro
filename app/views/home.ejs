@@ -1,0 +1,12 @@
+<div class="jumbotron">
+    <h1 class="display-4">Bem-vindo ao Node Auth App</h1>
+    <% if (locals.user) { %>
+        <p class="lead">Você está logado como <%= user.username %></p>
+        <hr class="my-4">
+        <p>Use o menu acima para navegar pelo sistema.</p>
+    <% } else { %>
+        <p class="lead">Por favor, faça login ou registre-se para continuar.</p>
+        <hr class="my-4">
+        <p>Use os links acima para acessar o sistema.</p>
+    <% } %>
+</div> 

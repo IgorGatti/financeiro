@@ -3,19 +3,40 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>
-        <%= title %>
-    </title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Auth App</title>
+    <link href="/css/output.css" rel="stylesheet">
+    <%- style %>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-6">
-            <%= title %>
-        </h1>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="/" class="text-xl font-bold text-gray-800">Node Auth</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <% if (locals.user) { %>
+                        <span class="text-gray-700 mr-4">Bem-vindo, <%= user.username %></span>
+                        <a href="/users" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Usuários</a>
+                        <a href="/auth/logout" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Sair</a>
+                    <% } else { %>
+                        <a href="/auth/login" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="/auth/register" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Registrar</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <%- body %>
-    </div>
+    </main>
+
+    <%- script %>
 </body>
 
 </html>

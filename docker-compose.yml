@@ -21,9 +21,10 @@ services:
       DB_USER: myuser
       DB_PASSWORD: mypassword
       DB_NAME: myapp
+      NODE_ENV: development
     volumes:
       - ./app:/app
-      - /app/node_modules 
+      - /app/node_modules
     ports:
       - "3000:3000"
 
