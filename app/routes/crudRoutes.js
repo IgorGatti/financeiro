@@ -16,7 +16,11 @@ function createCrudRoutes(model, routeBase) {
 
   // Formulário de adicionar
   router.get('/add', (req, res) => {
-    res.render(`${routeBase}/add`);
+    res.render(`${routeBase}/form`, { 
+      category: {}, 
+      action: `/${routeBase}/add`,
+      title: 'Nova Categoria'
+    });
   });
 
   // Adicionar novo
@@ -35,7 +39,11 @@ function createCrudRoutes(model, routeBase) {
     try {
       const item = await model.findById(req.params.id);
       if (!item) return res.status(404).send('Registro não encontrado');
-      res.render(`${routeBase}/edit`, { item });
+      res.render(`${routeBase}/form`, { 
+        category: item, 
+        action: `/${routeBase}/edit/${item.id}`,
+        title: 'Editar Categoria'
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send('Erro ao buscar registro');
@@ -43,7 +51,7 @@ function createCrudRoutes(model, routeBase) {
   });
 
   // Atualizar
-  router.post('/edit/:id', async (req, res) => {
+  router.put('/edit/:id', async (req, res) => {
     try {
       await model.update(req.params.id, req.body);
       res.redirect(`/${routeBase}`);

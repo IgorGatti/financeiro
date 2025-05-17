@@ -21,16 +21,20 @@ class User extends BaseModel {
         const hashedPassword = await bcrypt.hash(userData.password, 10);
         const result = await pool.query(
             `INSERT INTO users (
-                username, 
-                email, 
-                password, 
-                nome_completo
-            ) VALUES ($1, $2, $3, $4) RETURNING *`,
+                username,
+                email,
+                password,
+                nome_completo,
+                data_criacao,
+                data_atualizacao,
+                ultimo_login,
+                ativo
+            ) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, true) RETURNING *`,
             [
                 userData.username,
                 userData.email,
                 hashedPassword,
-                userData.nome_completo || null
+                userData.nome_completo
             ]
         );
         return result.rows[0];
@@ -49,7 +53,7 @@ class User extends BaseModel {
     }
 
     async updateProfile(userId, userData) {
-        const allowedFields = ['nome_completo', 'email'];
+        const allowedFields = ['username', 'nome_completo', 'email'];
         const updates = {};
         
         for (const field of allowedFields) {
@@ -61,6 +65,8 @@ class User extends BaseModel {
         if (Object.keys(updates).length === 0) {
             return null;
         }
+
+        updates.data_atualizacao = 'CURRENT_TIMESTAMP';
 
         const setClause = Object.keys(updates)
             .map((key, index) => `${key} = $${index + 2}`)

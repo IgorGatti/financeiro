@@ -1,12 +1,12 @@
-<div class="jumbotron">
-    <h1 class="display-4">Bem-vindo ao Node Auth App</h1>
+<div class="bg-white shadow rounded-lg p-6">
+    <h1 class="text-3xl font-bold text-gray-900 mb-4">Bem-vindo ao Node Auth App</h1>
     <% if (locals.user) { %>
-        <p class="lead">Você está logado como <%= user.username %></p>
-        <hr class="my-4">
-        <p>Use o menu acima para navegar pelo sistema.</p>
+        <p class="text-lg text-gray-700 mb-4">Você está logado como <%= user.username %></p>
+        <hr class="my-4 border-gray-200">
+        <p class="text-gray-600">Use o menu acima para navegar pelo sistema.</p>
     <% } else { %>
-        <p class="lead">Por favor, faça login ou registre-se para continuar.</p>
-        <hr class="my-4">
-        <p>Use os links acima para acessar o sistema.</p>
+        <p class="text-lg text-gray-700 mb-4">Por favor, faça login ou registre-se para continuar.</p>
+        <hr class="my-4 border-gray-200">
+        <p class="text-gray-600">Use os links acima para acessar o sistema.</p>
     <% } %>
 </div> 
