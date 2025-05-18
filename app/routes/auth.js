@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 // Mostrar formulário de login
 router.get('/login', (req, res) => {
-    res.render('auth/login', { error: null });
+    res.render('auth/login', { error: null, layout: false });
 });
 
 // Processar login
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
 
 // Mostrar formulário de registro
 router.get('/register', (req, res) => {
-    res.render('auth/register', { error: null });
+    res.render('auth/register', { error: null, layout: false });
 });
 
 // Processar registro

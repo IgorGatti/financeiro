@@ -7,7 +7,10 @@ function createCrudRoutes(model, routeBase) {
   router.get('/', async (req, res) => {
     try {
       const items = await model.findAll();
-      res.render(`${routeBase}/index`, { items });
+      res.render(`${routeBase}/index`, { 
+        items,
+        modelName: routeBase
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send('Erro ao buscar registros');
@@ -19,7 +22,8 @@ function createCrudRoutes(model, routeBase) {
     res.render(`${routeBase}/form`, { 
       category: {}, 
       action: `/${routeBase}/add`,
-      title: 'Nova Categoria'
+      modelName: routeBase,
+      title: 'Nova ' + routeBase.charAt(0).toUpperCase() + routeBase.slice(1)
     });
   });
 
@@ -42,7 +46,8 @@ function createCrudRoutes(model, routeBase) {
       res.render(`${routeBase}/form`, { 
         category: item, 
         action: `/${routeBase}/edit/${item.id}`,
-        title: 'Editar Categoria'
+        title: 'Editar ' + routeBase.charAt(0).toUpperCase() + routeBase.slice(1),
+        modelName: routeBase
       });
     } catch (error) {
       console.error(error);

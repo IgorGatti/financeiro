@@ -1,27 +1,27 @@
 <%- contentFor('body') %>
 
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-2xl mx-auto">
-        <div class="bg-white rounded-lg shadow overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-xl font-semibold text-gray-800"><%= category.id ? 'Editar' : 'Nova' %> Categoria</h2>
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+            <div class="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-white"><%= category.id ? 'Editar' : 'Nova' %> Categoria</h2>
             </div>
             
-            <div class="p-6">
+            <div class="p-8">
                 <% if (locals.error) { %>
-                    <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    <div class="mb-6 bg-red-50 dark:bg-red-900/50 border-l-4 border-red-500 text-red-700 dark:text-red-400 p-4 rounded-md">
                         <%= error %>
                     </div>
                 <% } %>
 
-                <form action="<%= action %>" method="POST" class="space-y-4">
+                <form action="<%= action %>" method="POST" class="space-y-6">
                     <% if (category.id) { %>
                         <input type="hidden" name="_method" value="PUT">
                     <% } %>
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nome da Categoria</label>
+                        <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Nome da Categoria</label>
                         <input type="text" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                               class="mt-1 block w-full px-4 py-3 text-lg rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 transition duration-150 ease-in-out"
                                id="name" 
                                name="name" 
                                value="<%= category.name || '' %>" 
@@ -29,16 +29,16 @@
                     </div>
 
                     <div>
-                        <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
-                        <textarea class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        <label for="description" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Descrição</label>
+                        <textarea class="mt-1 block w-full px-4 py-3 text-lg rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 transition duration-150 ease-in-out"
                                   id="description" 
                                   name="description" 
-                                  rows="3"><%= category.description || '' %></textarea>
+                                  rows="4"><%= category.description || '' %></textarea>
                     </div>
 
                     <div>
-                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        <label for="status" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                        <select class="mt-1 block w-full px-4 py-3 text-lg rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-800 transition duration-150 ease-in-out"
                                 id="status" 
                                 name="status">
                             <option value="active" <%= category.status === 'active' ? 'selected' : '' %>>Ativo</option>
@@ -46,15 +46,15 @@
                         </select>
                     </div>
 
-                    <div class="flex space-x-4 pt-4">
-                        <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex space-x-6 pt-6">
+                        <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white px-6 py-3 text-lg font-semibold rounded-lg flex items-center justify-center transition duration-150 ease-in-out transform hover:scale-[1.02]">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <%= category.id ? 'Atualizar' : 'Salvar' %> Categoria
                         </button>
-                        <a href="/categories" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="/categories" class="flex-1 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 text-lg font-semibold rounded-lg flex items-center justify-center transition duration-150 ease-in-out transform hover:scale-[1.02]">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
                             Cancelar
@@ -65,9 +65,6 @@
         </div>
     </div>
 </div>
-
-<%- contentFor('style') %>
-<script src="https://cdn.tailwindcss.com"></script>
 
 <%- contentFor('script') %>
 <script>
